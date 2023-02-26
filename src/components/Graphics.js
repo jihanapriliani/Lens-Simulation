@@ -23,7 +23,7 @@ export default function Graphics(props) {
         // p5.stroke(32, 111, 153);
         // p5.ellipse(width / 2, height / 2, focus / 3, height);
 
-        p5.stroke(171, 122, 72);
+        p5.stroke("black");
         p5.line(width / 2, 0, width / 2, height); // Y Axis
         p5.line(0, height / 2, width, height / 2); // X Axis
         
@@ -36,7 +36,7 @@ export default function Graphics(props) {
 
 
         // LINE ON THE TOP OF OBJECT (LIGHT 1)
-        p5.stroke(255, 204, 0);
+        p5.stroke("red");
         p5.line(width / 2 - distance, height / 2 - size, width / 2, height / 2 - size);
         p5.line(width / 2 - distance, height / 2 - size, 0, height / 2 - size);
         p5.line(width / 2, height / 2 - size, width / 2 - distance_, height / 2 - size_);
@@ -45,16 +45,17 @@ export default function Graphics(props) {
 
         // LINE THAT GO ON THE BOTTOM OBJECT (LIGHT 2)
         // kurang yang lurus terus
-        p5.stroke(255, 204, 0);
+        p5.stroke("yellow");
         p5.line(width / 2 - distance, height / 2 - size,  width / 2, height / 2 - size_)
         p5.line(width / 2, height / 2 - size_, width / 2 - distance_, height / 2 - size_)
         p5.line(width / 2 - distance_, height / 2 - size_, width, height / 2 - size_)
 
         // LIGHT 3
-        p5.stroke(255, 204, 0);
+        p5.stroke("purple");
         // kurang yang lurus terus
         p5.line(width / 2 - distance, height / 2 - size,  width / 2 - distance_, height / 2 - size_)
         // kurang yang lurus terus
+        
     }
 
 
