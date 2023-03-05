@@ -8,20 +8,11 @@ export default function Graphics(props) {
     const {width, height, size, distance, focus} = props;
 
     const [distance_, setDistance_] = useState(-getDistanceReflection(distance, focus));
-
-  
     const [size_, setSize_] = useState(getSizeReflection(distance, size, distance_));
 
-    useEffect(() => {
-        setDistance_(-getDistanceReflection(distance, focus));
-        setSize_(getSizeReflection(distance, size, distance_));
-    }, [size, distance, focus])
-  
-    const setup = (p5, canvasParentRef) => {
-        p5.createCanvas(width, height).parent(canvasParentRef);
-    }
-      
     const draw = p5 => {
+
+        p5.background(255,255,255);
         
         p5.stroke(32, 111, 153);
         p5.ellipse(width / 2, height / 2, focus / 3, height);
@@ -60,6 +51,15 @@ export default function Graphics(props) {
         // kurang yang lurus terus
     }
 
+    useEffect(() => {
+        setDistance_(-getDistanceReflection(distance, focus));
+        setSize_(getSizeReflection(distance, size, distance_));
+    }, [size, distance, focus, draw])
+  
+    const setup = (p5, canvasParentRef) => {
+        p5.createCanvas(width, height).parent(canvasParentRef);
+    }
+      
 
 
     return (
