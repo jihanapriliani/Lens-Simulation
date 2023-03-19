@@ -24,18 +24,29 @@ export function ddaInfinite(x1, y1, quadrant, p5) {
     let x = x1;
     let y = y1;
     if(quadrant === 1){
-
-    } else if(quadrant === 2) {
-        while(x != 0 || y != 0) {
+        while(x >= 0 || y >= 0) {
             p5.point(x, y);
             x -= 1;
             y -= 1;
         }
-
+    } else if(quadrant === 2) {
+        while(x >= 0 || y >= 0) {
+            p5.point(x, y);
+            x -= 1;
+            y -= 1;
+        }
     } else if(quadrant === 3) {
-
+        while(x <= 1000 || y <= 600) {
+            p5.point(x, y);
+            x -= 1;
+            y += 1;
+        }  
     } else if(quadrant === 4) {
-        
+        while(x <= 1000 || y <= 600) {
+            p5.point(x, y);
+            x += 1;
+            y += 1;
+        }  
     }
 }
 

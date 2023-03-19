@@ -11,6 +11,7 @@ export default function Graphics(props) {
     const [distance_, setDistance_] = useState(-getDistanceReflection(distance, focus));
     const [size_, setSize_] = useState(getSizeReflection(distance, size, distance_));
 
+
     const draw = p5 => {
         p5.clear();
 
@@ -36,25 +37,22 @@ export default function Graphics(props) {
         dda(width / 2 - distance, height / 2 - size, width / 2, height / 2 - size, p5);
         dda(width / 2 - distance, height / 2 - size, 0, height / 2 - size, p5);
         dda(width / 2, height / 2 - size, width / 2 - distance_, height / 2 - size_, p5);
-        // kurang yang lurus terus
+        ddaInfinite(width / 2 - distance_, height / 2 - size_, 4, p5);
 
 
         // LINE THAT GO ON THE BOTTOM OBJECT (LIGHT 2)
-        // kurang yang lurus terus
         p5.stroke("yellow");
+        ddaInfinite(width / 2 - distance, height / 2 - size, 2, p5);
         dda(width / 2 - distance_, height / 2 - size_, width, height / 2 - size_, p5);
         dda(width / 2 - distance, height / 2 - size,  width / 2, height / 2 - size_, p5);
         dda(width / 2, height / 2 - size_, width / 2 - distance_, height / 2 - size_, p5);
-        // dda(width / 2 - distance_, height / 2 - size_, width, height / 2 - size_);
 
         // LIGHT 3
         p5.stroke("purple");
-        // kurang yang lurus terus
-        // p5.line(width / 2 - distance, height / 2 - size,  width / 2 - distance_, height / 2 - size_)
+        
+        ddaInfinite(width / 2 - distance, height / 2 - size, 2, p5);
         dda(width / 2 - distance, height / 2 - size,  width / 2 - distance_, height / 2 - size_, p5);
-        // kurang yang lurus terus
-
-    
+        ddaInfinite(width / 2 - distance_, height / 2 - size_, 4, p5);
 
     }
 
