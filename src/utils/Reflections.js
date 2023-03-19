@@ -3,6 +3,6 @@ export function getDistanceReflection(distance, focus) {
     return Math.round(1 / distance_);
 }
 
-export function getSizeReflection (distance, size, distanceRef) {
+export function getSizeReflection(distance, size, distanceRef) {
     return Math.round(size * distanceRef / distance);
 }

@@ -3,9 +3,10 @@ import propType from 'prop-types';
 import Sketch from 'react-p5';
 
 import { dda, ddaInfinite } from '../utils/DDA';
+import drawCircle from '../utils/Midpoint';
 import { getDistanceReflection, getSizeReflection } from '../utils/Reflections';
 
-export default function Graphics(props) {
+export default function ConvexGraph(props) {
     const {width, height, size, distance, focus} = props;
 
     const [distance_, setDistance_] = useState(-getDistanceReflection(distance, focus));
@@ -18,7 +19,14 @@ export default function Graphics(props) {
         p5.background(255,255,255);
         
         p5.stroke(32, 111, 153);
-        p5.ellipse(width / 2, height / 2, focus / 3, height);
+        drawCircle(width / 2, height / 2, focus / 3, height / 2, p5);
+
+        p5.textSize(18);
+        p5.text('f', width / 2 - focus, height / 2);
+        p5.text('r', width / 2 - 2 * focus, height / 2);
+
+        p5.text('f', width / 2 + focus, height / 2);
+        p5.text('r', width / 2 + 2 * focus, height / 2);
 
         p5.stroke("black");
         dda(width / 2, 0, width / 2, height, p5);
@@ -36,23 +44,20 @@ export default function Graphics(props) {
         p5.stroke("red");
         dda(width / 2 - distance, height / 2 - size, width / 2, height / 2 - size, p5);
         dda(width / 2 - distance, height / 2 - size, 0, height / 2 - size, p5);
-        dda(width / 2, height / 2 - size, width / 2 - distance_, height / 2 - size_, p5);
-        ddaInfinite(width / 2 - distance_, height / 2 - size_, 4, p5);
-
-
+        ddaInfinite(width / 2, height / 2 - size, width / 2 - distance_, height / 2 - size_, 4, p5);
+     
         // LINE THAT GO ON THE BOTTOM OBJECT (LIGHT 2)
         p5.stroke("yellow");
-        ddaInfinite(width / 2 - distance, height / 2 - size, 2, p5);
-        dda(width / 2 - distance_, height / 2 - size_, width, height / 2 - size_, p5);
-        dda(width / 2 - distance, height / 2 - size,  width / 2, height / 2 - size_, p5);
+        // ddaInfinite(width / 2 - distance, height / 2 - size,  width / 2, height / 2 - size_, 2, p5);
+        ddaInfinite(width / 2, height / 2 - size_,  width / 2, height / 2 - size_, 2, p5);
+
         dda(width / 2, height / 2 - size_, width / 2 - distance_, height / 2 - size_, p5);
+        dda(width / 2 - distance_, height / 2 - size_, width, height / 2 - size_, p5);
 
         // LIGHT 3
         p5.stroke("purple");
-        
-        ddaInfinite(width / 2 - distance, height / 2 - size, 2, p5);
-        dda(width / 2 - distance, height / 2 - size,  width / 2 - distance_, height / 2 - size_, p5);
-        ddaInfinite(width / 2 - distance_, height / 2 - size_, 4, p5);
+        ddaInfinite(width / 2 - distance, height / 2 - size,  width / 2 - distance_, height / 2 - size_, 2, p5);
+        ddaInfinite(width / 2 - distance, height / 2 - size,  width / 2 - distance_, height / 2 - size_, 4, p5);
 
     }
 
@@ -72,7 +77,7 @@ export default function Graphics(props) {
 
 }
 
-Graphics.propType = {
+ConvexGraph.propType = {
     height: propType.number,
     width: propType.number,
 }
