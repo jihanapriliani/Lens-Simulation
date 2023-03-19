@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import propType from 'prop-types';
 import Sketch from 'react-p5';
 
+import { dda, ddaInfinite } from '../utils/DDA';
 import { getDistanceReflection, getSizeReflection } from '../utils/Reflections';
 
 export default function Graphics(props) {
@@ -11,6 +12,7 @@ export default function Graphics(props) {
     const [size_, setSize_] = useState(getSizeReflection(distance, size, distance_));
 
     const draw = p5 => {
+        p5.clear();
 
         p5.background(255,255,255);
         
@@ -18,37 +20,42 @@ export default function Graphics(props) {
         p5.ellipse(width / 2, height / 2, focus / 3, height);
 
         p5.stroke("black");
-        p5.line(width / 2, 0, width / 2, height); // Y Axis
-        p5.line(0, height / 2, width, height / 2); // X Axis
+        dda(width / 2, 0, width / 2, height, p5);
+        dda(0, height / 2, width, height / 2, p5);
         
         // OBJECT
         p5.stroke(50, 168, 82);
-        p5.line(width / 2 - distance, height / 2, width / 2 - distance, height / 2 - size); 
+        dda(width / 2 - distance, height / 2, width / 2 - distance, height / 2 - size, p5);
         // REFLECTION: OBJECT
         p5.stroke(85, 115, 70);
-        p5.line(width / 2 - distance_, height / 2, width / 2 - distance_, height / 2 - size_); 
+        dda(width / 2 - distance_, height / 2, width / 2 - distance_, height / 2 - size_, p5);
 
 
         // LINE ON THE TOP OF OBJECT (LIGHT 1)
         p5.stroke("red");
-        p5.line(width / 2 - distance, height / 2 - size, width / 2, height / 2 - size);
-        p5.line(width / 2 - distance, height / 2 - size, 0, height / 2 - size);
-        p5.line(width / 2, height / 2 - size, width / 2 - distance_, height / 2 - size_);
+        dda(width / 2 - distance, height / 2 - size, width / 2, height / 2 - size, p5);
+        dda(width / 2 - distance, height / 2 - size, 0, height / 2 - size, p5);
+        dda(width / 2, height / 2 - size, width / 2 - distance_, height / 2 - size_, p5);
         // kurang yang lurus terus
 
 
         // LINE THAT GO ON THE BOTTOM OBJECT (LIGHT 2)
         // kurang yang lurus terus
         p5.stroke("yellow");
-        p5.line(width / 2 - distance, height / 2 - size,  width / 2, height / 2 - size_)
-        p5.line(width / 2, height / 2 - size_, width / 2 - distance_, height / 2 - size_)
-        p5.line(width / 2 - distance_, height / 2 - size_, width, height / 2 - size_)
+        dda(width / 2 - distance_, height / 2 - size_, width, height / 2 - size_, p5);
+        dda(width / 2 - distance, height / 2 - size,  width / 2, height / 2 - size_, p5);
+        dda(width / 2, height / 2 - size_, width / 2 - distance_, height / 2 - size_, p5);
+        // dda(width / 2 - distance_, height / 2 - size_, width, height / 2 - size_);
 
         // LIGHT 3
         p5.stroke("purple");
         // kurang yang lurus terus
-        p5.line(width / 2 - distance, height / 2 - size,  width / 2 - distance_, height / 2 - size_)
+        // p5.line(width / 2 - distance, height / 2 - size,  width / 2 - distance_, height / 2 - size_)
+        dda(width / 2 - distance, height / 2 - size,  width / 2 - distance_, height / 2 - size_, p5);
         // kurang yang lurus terus
+
+    
+
     }
 
     useEffect(() => {
@@ -59,7 +66,6 @@ export default function Graphics(props) {
     const setup = (p5, canvasParentRef) => {
         p5.createCanvas(width, height).parent(canvasParentRef);
     }
-      
 
 
     return (

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import './App.css';
 
 import { getDistanceReflection, getSizeReflection } from './utils/Reflections';
@@ -6,6 +6,8 @@ import { getDistanceReflection, getSizeReflection } from './utils/Reflections';
 import Header from './components/Header';
 import Graphics from './components/Graphics';
 import Slider from './components/Slider';
+import debounce from 'lodash.debounce';
+
 
 function App() {
   const [heigth, setHeight] = useState(100);
@@ -37,6 +39,18 @@ function App() {
     setFocus(parseInt(e.target.value))
   }
 
+  const decounceDistanceHandler = useCallback(
+    debounce(handleDistanceSlider, 50)
+  , []);
+  
+  const decounceHeightHandler = useCallback(
+    debounce(handleHeightSlider, 50)
+  , []);
+
+  const decounceFocusHandler = useCallback(
+    debounce(handleFocusSlider, 50)
+  , []);
+
   return (
     <div className="h-full bg-sky-100">
       <div className='flex justify-center items-start'>
@@ -52,21 +66,21 @@ function App() {
             title="Jarak Benda"
             maxValue={CANVAS_WIDTH / 2} 
             defaultValue={CANVAS_WIDTH / 2 - distance} 
-            onChange={handleDistanceSlider}
+            onChange={decounceDistanceHandler}
           />
 
           <Slider 
             title="Tinggi Benda"
             maxValue={CANVAS_HEIGHT / 2} 
             defaultValue={CANVAS_HEIGHT / 2 - heigth} 
-            onChange={handleHeightSlider}
+            onChange={decounceHeightHandler}
           />
 
           <Slider 
             title="Fokus Lensa"
-            maxValue={300} 
+            maxValue={150} 
             defaultValue={focus} 
-            onChange={handleFocusSlider}
+            onChange={decounceFocusHandler}
           />
         </div>
 
@@ -75,15 +89,15 @@ function App() {
           <div className='px-10 pt-10 pb-10'>
               <div className="flex justify-between mb-9">
                 <label for="tinggi_objek" className=" pt-3 text-sm font-medium text-gray-900 dark:text-white">Tinggi Objek : </label>
-                <input onChange={(e) => setHeight(parseInt(e.target.value))} type="number" id="tinggi_objek" className="ml-3 bg-sky-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-32 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={heigth} max={CANVAS_HEIGHT / 2} required/>
+                <input type="number" id="tinggi_objek" className="ml-3 bg-sky-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-32 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={heigth} max={CANVAS_HEIGHT / 2} required/>
               </div>
               <div className="flex justify-between mb-9">
                 <label for="jarak_benda" className="pt-3 text-sm font-medium text-gray-900 dark:text-white">Jarak Objek : </label>
-                <input onChange={(e) => setDistance(parseInt(e.target.value))} type="number" id="jarak_benda" className="ml-6 bg-sky-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-32 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={distance} max={CANVAS_WIDTH / 2} required/>
+                <input  type="number" id="jarak_benda" className="ml-6 bg-sky-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-32 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={distance} max={CANVAS_WIDTH / 2} required/>
               </div>
               <div className="flex justify-between mb-9">
                 <label for="fokus_lensa" className="pt-3 text-sm font-medium text-gray-900 dark:text-white">Fokus Lensa : </label>
-                <input onChange={(e) => setFocus(parseInt(e.target.value))} type="number" id="fokus_lensa" className="ml-6 bg-sky-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-32 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={focus} max={300} required/>
+                <input type="number" id="fokus_lensa" className="ml-6 bg-sky-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-32 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={focus} max={150} required/>
               </div>
           
               <hr className='my-8'/>
