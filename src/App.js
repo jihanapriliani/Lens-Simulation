@@ -42,15 +42,15 @@ function App() {
   }
 
   const decounceDistanceHandler = useCallback(
-    debounce(handleDistanceSlider, 50)
+    debounce(handleDistanceSlider, 0)
   , []);
   
   const decounceHeightHandler = useCallback(
-    debounce(handleHeightSlider, 50)
+    debounce(handleHeightSlider, 0)
   , []);
 
   const decounceFocusHandler = useCallback(
-    debounce(handleFocusSlider, 50)
+    debounce(handleFocusSlider, 0)
   , []);
 
   return (

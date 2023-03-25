@@ -10,6 +10,9 @@ export function dda(x1, y1, x2, y2, p5) {
     let x = x1;
     let y = y1;
 
+
+
+
     for(let i = 0; i <= steps; i++) {
         p5.point(x, y);
 
@@ -18,7 +21,7 @@ export function dda(x1, y1, x2, y2, p5) {
     }
 }
 
-export function ddaInfinite(x1, y1, x2, y2, quadrant, p5) {
+export function getBoundPoint(x1, y1, x2, y2) {
     let dx = x2 - x1;
     let dy = y2 - y1;
 
@@ -30,32 +33,12 @@ export function ddaInfinite(x1, y1, x2, y2, quadrant, p5) {
     let x = x1;
     let y = y1;
 
-    if(quadrant === 1){
-        while(x >= 0 || y >= 0) {
-            p5.point(x, y);
-            x -= xIncrement;
-            y -= yIncrement;
-        }
-    } else if(quadrant === 2) {
-        while(x >= 0 || y >= 0) {
-            p5.point(x, y);
-            x -= xIncrement;
-            y -= yIncrement;
-        }
-    } else if(quadrant === 3) {
-        while(x <= 1000 || y <= 600) {
-            p5.point(x, y);
-            x -= xIncrement;
-            y += yIncrement;
-        }  
-    } else if(quadrant === 4) {
-        while(x <= 1000 || y <= 600) {
-            p5.point(x, y);
-            x += xIncrement;
-            y += yIncrement;
-        }  
-    }
-    
-}
 
+    while(y >= 0 && y <= 600 && x >= 0 && x <= 1000) {
+        x += xIncrement;
+        y += yIncrement;
+    }
+
+    return [x, y];
+}
 

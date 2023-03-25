@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import propType from 'prop-types';
 import Sketch from 'react-p5';
 
-import { dda, ddaInfinite } from '../utils/DDA';
+import { dda, ddaInfinite, getBoundPoint } from '../utils/DDA';
 import drawCircle from '../utils/Midpoint';
 import { getDistanceReflection, getSizeReflection } from '../utils/Reflections';
 
@@ -11,6 +11,11 @@ export default function ConvexGraph(props) {
 
     const [distance_, setDistance_] = useState(-getDistanceReflection(distance, focus));
     const [size_, setSize_] = useState(getSizeReflection(distance, size, distance_));
+
+    const [infinite1, setInfinite1] = useState(getBoundPoint(width / 2, height / 2 - size, width / 2 - distance_, height / 2 - size_));
+    const [infinite2, setInfinite2] = useState(getBoundPoint(width / 2, height / 2 - size_, width / 2 - distance, height / 2 -size));
+    const [infinite3, setInfinite3] = useState(getBoundPoint(width / 2 - distance, height / 2 - size,  width / 2 - distance_, height / 2 - size_));
+    const [infinite4, setInfinite4] = useState(getBoundPoint(width / 2 - distance_, height / 2 - size_, width / 2 - distance, height / 2 - size));
 
 
     const draw = p5 => {
@@ -38,33 +43,31 @@ export default function ConvexGraph(props) {
         // REFLECTION: OBJECT
         p5.stroke(85, 115, 70);
         dda(width / 2 - distance_, height / 2, width / 2 - distance_, height / 2 - size_, p5);
+      
 
-
-        // LINE ON THE TOP OF OBJECT (LIGHT 1)
         p5.stroke("red");
-        dda(width / 2 - distance, height / 2 - size, width / 2, height / 2 - size, p5);
-        dda(width / 2 - distance, height / 2 - size, 0, height / 2 - size, p5);
-        ddaInfinite(width / 2, height / 2 - size, width / 2 - distance_, height / 2 - size_, 4, p5);
+        dda(0, height / 2 - size, width / 2, height / 2 - size, p5);
+        dda(width / 2, height / 2 - size, infinite1[0], infinite1[1], p5);
+        
      
-        // LINE THAT GO ON THE BOTTOM OBJECT (LIGHT 2)
         p5.stroke("yellow");
-        // ddaInfinite(width / 2 - distance, height / 2 - size,  width / 2, height / 2 - size_, 2, p5);
-        ddaInfinite(width / 2, height / 2 - size_,  width / 2, height / 2 - size_, 2, p5);
+        dda(width / 2, height / 2 - size_, width, height / 2 - size_, p5);
+        dda(width / 2, height / 2 - size_, infinite2[0], infinite2[1], p5);
 
-        dda(width / 2, height / 2 - size_, width / 2 - distance_, height / 2 - size_, p5);
-        dda(width / 2 - distance_, height / 2 - size_, width, height / 2 - size_, p5);
-
-        // LIGHT 3
         p5.stroke("purple");
-        ddaInfinite(width / 2 - distance, height / 2 - size,  width / 2 - distance_, height / 2 - size_, 2, p5);
-        ddaInfinite(width / 2 - distance, height / 2 - size,  width / 2 - distance_, height / 2 - size_, 4, p5);
-
+        dda(infinite3[0], infinite3[1], infinite4[0], infinite4[1], p5);
     }
 
     useEffect(() => {
         setDistance_(-getDistanceReflection(distance, focus));
         setSize_(getSizeReflection(distance, size, distance_));
-    }, [size, distance, focus, draw])
+
+        setInfinite1(getBoundPoint(width / 2, height / 2 - size, width / 2 - distance_, height / 2 - size_))
+        setInfinite2(getBoundPoint(width / 2, height / 2 - size_, width / 2 - distance, height / 2 - size))
+        setInfinite3(getBoundPoint(width / 2 - distance, height / 2 - size,  width / 2 - distance_, height / 2 - size_));
+        setInfinite4(getBoundPoint(width / 2 - distance_, height / 2 - size_, width / 2 - distance, height / 2 - size))
+
+    }, [distance, size, focus])
   
     const setup = (p5, canvasParentRef) => {
         p5.createCanvas(width, height).parent(canvasParentRef);
@@ -76,6 +79,8 @@ export default function ConvexGraph(props) {
   )
 
 }
+
+
 
 ConvexGraph.propType = {
     height: propType.number,
