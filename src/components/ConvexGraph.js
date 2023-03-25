@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import propType from 'prop-types';
 import Sketch from 'react-p5';
 
-import { dda, ddaInfinite, getBoundPoint } from '../utils/DDA';
+import { dda, getBoundPoint } from '../utils/DDA';
 import drawCircle from '../utils/Midpoint';
 import { getDistanceReflection, getSizeReflection } from '../utils/Reflections';
 
@@ -43,8 +43,14 @@ export default function ConvexGraph(props) {
         // REFLECTION: OBJECT
         p5.stroke(85, 115, 70);
         dda(width / 2 - distance_, height / 2, width / 2 - distance_, height / 2 - size_, p5);
-      
+        
+        p5.textSize(12);
+        p5.text(size, width / 2 - distance + 10, height / 2 - size / 2);
+        p5.text(-(size_), width / 2 - distance_ + 10, height / 2 - size_ / 2);
+        p5.text(distance, width / 2 - distance / 2, height / 2 + 15);
+        p5.text(-(distance_), width / 2 - distance_ / 2, height / 2 + 15);
 
+        
         p5.stroke("red");
         dda(0, height / 2 - size, width / 2, height / 2 - size, p5);
         dda(width / 2, height / 2 - size, infinite1[0], infinite1[1], p5);

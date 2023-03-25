@@ -122,7 +122,7 @@ function App() {
           
               <hr className='my-8'/>
 
-              <div className="flex justify-between mb-9">
+              {/* <div className="flex justify-between mb-9">
                 <label for="fokus_lensa" className="pt-3 text-sm font-medium text-gray-900 dark:text-white">Tinggi Bayangan  : </label>
                 <input type="number" className="ml-6 bg-sky-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-32 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={size_} disabled/>
               </div>
@@ -130,7 +130,7 @@ function App() {
               <div className="flex justify-between mb-9">
                 <label for="fokus_lensa" className="pt-3 text-sm font-medium text-gray-900 dark:text-white">Jarak Bayangan : </label>
                 <input type="number" className="ml-6 bg-sky-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-32 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={distance_} disabled/>
-              </div>
+              </div> */}
 
           </div>
         </div>
