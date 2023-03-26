@@ -102,7 +102,6 @@ export default function ConvexMirror(props) {
 
 }
 
-
 ConvexMirror.propType = {
     height: propType.number,
     width: propType.number,

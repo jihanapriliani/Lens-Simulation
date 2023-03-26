@@ -23,5 +23,7 @@ export default () => {
 
             </nav>
         </div>
-    )
+     );
 }
+ 
+export default Header;
