@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
 import { getDistanceReflection, getSizeReflection } from './utils/Reflections';
 
 import Header from './components/Header';
@@ -59,20 +58,20 @@ function App() {
 
         <div className="m-10 drop-shadow-lg">
             <div class="inline-flex rounded-md shadow-sm mb-3">
-              <a to="/concave" aria-current="page" class="px-4 py-2 text-sm font-medium text-blue-700 bg-white border border-gray-200 rounded-l-lg hover:bg-gray-100 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white" relative='path'>
+              <button to="/concave" aria-current="page" class="px-4 py-2 text-sm font-medium text-dark bg-white border border-gray-200 rounded-l-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white" relative='path'>
                 Cermin Cekung
-              </a>
-              <a to="/" class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-r-md hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white" relative='path'>
+              </button>
+              <button to="/" class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-r-md hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white" relative='path'>
                 Lensa Cembung
-              </a>
+              </button>
             </div>
 
 
-            <div className='p-6 bg-slate-100'>
+            <div className='p-6 bg-slate-100 rounded-lg'>
               <BrowserRouter>
                 <Routes>
                   <Route path='/' element={<ConvexGraph width={CANVAS_WIDTH} height={CANVAS_HEIGHT} size={heigth} distance={distance} focus={focus} />} />
-                  <Route path='concave' element={<ConcaveGraph width={CANVAS_WIDTH} height={CANVAS_HEIGHT} size={heigth} distance={distance} focus={focus} />} />
+                  <Route path='/concave' element={<ConcaveGraph width={CANVAS_WIDTH} height={CANVAS_HEIGHT} size={heigth} distance={distance} focus={focus} />} />
                 </Routes>
               </BrowserRouter>
             </div>

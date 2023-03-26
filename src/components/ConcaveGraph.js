@@ -18,6 +18,9 @@ export default function ConcaveGraph(props) {
 
         p5.background(255,255,255);
 
+        p5.stroke(32, 111, 153);
+        drawCircle(width / 2, height / 2, focus / 3, height / 2, p5);
+
         p5.textSize(18);
         p5.text('f', width / 2 - focus, height / 2);
         p5.text('r', width / 2 - 2 * focus, height / 2);
@@ -29,15 +32,16 @@ export default function ConcaveGraph(props) {
         // OBJECT
         p5.stroke(50, 168, 82);
         dda(width / 2 - distance, height / 2, width / 2 - distance, height / 2 - size, p5);
+
         // REFLECTION: OBJECT
         p5.stroke(85, 115, 70);
-        dda();
+        dda(width / 2 - distance, height / 2, width / 2 - distance, height / 1.7 - size_, p5);
 
 
         // LINE ON THE TOP OF OBJECT (LIGHT 1)
         p5.stroke("red");
         dda(width / 2 - distance, height / 2 - size, width / 2, height / 2 - size, p5);
-        dda(width / 2 - distance, height / 2 - size, 0, height / 2 - size, p5);
+        // dda(width / 2 - distance, height / 2 - size, 0, height / 2 - size, p5);
         // ddaInfinite(width / 2, height / 2 - size, width / 2 - distance_, height / 2 - size_, 4, p5);
      
         // LINE THAT GO ON THE BOTTOM OBJECT (LIGHT 2)
