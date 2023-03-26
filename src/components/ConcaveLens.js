@@ -49,17 +49,29 @@ export default function ConcaveLens(props) {
         dda(0, height / 2, width, height / 2, p5);
         
 
-        p5.stroke(50, 168, 82);
-        dda(width / 2 - distance, height / 2, width / 2 - distance, height / 2 - size, p5);
-        p5.stroke(85, 115, 70);
-        dda(width / 2 - distance_, height / 2, width / 2 - distance_, height / 2 - size_, p5);
 
         if(object === "garis") {
-            drawStraightLine(p5, width, height, size, distance, size_, distance_);
+            p5.stroke(50, 168, 82);
+            dda(width / 2 - distance, height / 2, width / 2 - distance, height / 2 - size, p5);
+            p5.stroke(85, 115, 70);
+            dda(width / 2 - distance_, height / 2, width / 2 - distance_, height / 2 - size_, p5);
         }
 
         if(object === "gedung") {
             drawBuilding(p5, width, height, size, distance, size_, distance_);
+        }
+
+        if(object === "persegi-panjang") {
+            p5.stroke(50, 168, 82);
+            dda(width / 2 - distance + 20, height / 2, width / 2 - distance + 20, height / 2 - size, p5);
+            dda(width / 2 - distance - 20, height / 2, width / 2 - distance - 20, height / 2 - size, p5);
+            dda(width / 2 - distance + 20, height / 2 - size, width / 2 - distance - 20, height / 2 - size, p5);
+
+
+            p5.stroke(85, 115, 70);
+            dda(width / 2 - distance_ + 20, height / 2, width / 2 - distance_ + 20, height / 2 - size_, p5)
+            dda(width / 2 - distance_ - 20, height / 2, width / 2 - distance_ - 20, height / 2 - size_, p5)
+            dda(width / 2 - distance_ + 20, height / 2 - size_, width / 2 - distance_ - 20, height / 2 - size_, p5);
         }
         
         if(ray === "marginal") {
