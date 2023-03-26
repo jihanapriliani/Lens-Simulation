@@ -4,7 +4,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { getDistanceReflection, getSizeReflection } from './utils/Reflections';
 
-import Header from './components/Header';
 import ConvexGraph from './components/ConvexGraph';
 import Slider from './components/Slider';
 import debounce from 'lodash.debounce';
@@ -18,6 +17,9 @@ function App() {
 
   const [distance_, setDistance_] = useState(-getDistanceReflection(distance, focus));
   const [size_, setSize_] = useState(getSizeReflection(distance, heigth, distance_));
+
+
+  const [label, setLabel] = useState(false);
 
   useEffect(() => {
     setDistance_(-getDistanceReflection(distance, focus));
@@ -41,37 +43,20 @@ function App() {
     setFocus(parseInt(e.target.value))
   }
 
-  const decounceDistanceHandler = useCallback(
-    debounce(handleDistanceSlider, 0)
-  , []);
-  
-  const decounceHeightHandler = useCallback(
-    debounce(handleHeightSlider, 0)
-  , []);
-
-  const decounceFocusHandler = useCallback(
-    debounce(handleFocusSlider, 0)
-  , []);
+ const handleLabelClicked = (e) => {
+  setLabel(e.target.checked);
+ }
 
   return (
     <div className="h-[100vh] bg-sky-100">
       <div className='flex justify-center items-center'>
 
         <div className="m-10 drop-shadow-lg">
-            <div class="inline-flex rounded-md shadow-sm mb-3">
-              <a to="/concave" aria-current="page" class="px-4 py-2 text-sm font-medium text-blue-700 bg-white border border-gray-200 rounded-l-lg hover:bg-gray-100 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white" relative='path'>
-                Cermin Cekung
-              </a>
-              <a to="/" class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-r-md hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white" relative='path'>
-                Lensa Cembung
-              </a>
-            </div>
-
-
+          
             <div className='p-6 bg-slate-100'>
               <BrowserRouter>
                 <Routes>
-                  <Route path='/' element={<ConvexGraph width={CANVAS_WIDTH} height={CANVAS_HEIGHT} size={heigth} distance={distance} focus={focus} />} />
+                  <Route path='/' element={<ConvexGraph width={CANVAS_WIDTH} height={CANVAS_HEIGHT} size={heigth} distance={distance} focus={focus} hasLabel={label} />} />
                   <Route path='concave' element={<ConcaveGraph width={CANVAS_WIDTH} height={CANVAS_HEIGHT} size={heigth} distance={distance} focus={focus} />} />
                 </Routes>
               </BrowserRouter>
@@ -86,53 +71,64 @@ function App() {
               title="Jarak Benda"
               maxValue={CANVAS_WIDTH / 2} 
               defaultValue={CANVAS_WIDTH / 2 - distance} 
-              onChange={decounceDistanceHandler}
+              onChange={handleDistanceSlider}
             />
 
             <Slider 
               title="Tinggi Benda"
               maxValue={CANVAS_HEIGHT / 2} 
               defaultValue={CANVAS_HEIGHT / 2 - heigth} 
-              onChange={decounceHeightHandler}
+              onChange={handleHeightSlider}
             />
 
             <Slider 
               title="Titik Fokus"
               maxValue={150} 
               defaultValue={focus} 
-              onChange={decounceFocusHandler}
+              onChange={handleFocusSlider}
             />
           </div>
 
         {/* input ukuran objek dan jarak objek */}
         <div className='rounded-lg drop-shadow-xl'>
-          <div className='px-10 pt-10 pb-10'>
-              <div className="flex justify-between mb-9">
-                <label for="tinggi_objek" className=" pt-3 text-sm font-medium text-gray-900 dark:text-white">Tinggi Objek : </label>
-                <input type="number" id="tinggi_objek" className="ml-3 bg-sky-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-32 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={heigth} max={CANVAS_HEIGHT / 2} required/>
-              </div>
-              <div className="flex justify-between mb-9">
-                <label for="jarak_benda" className="pt-3 text-sm font-medium text-gray-900 dark:text-white">Jarak Objek : </label>
-                <input  type="number" id="jarak_benda" className="ml-6 bg-sky-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-32 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={distance} max={CANVAS_WIDTH / 2} required/>
-              </div>
-              <div className="flex justify-between mb-9">
-                <label for="fokus_lensa" className="pt-3 text-sm font-medium text-gray-900 dark:text-white">Titik Fokus : </label>
-                <input type="number" id="fokus_lensa" className="ml-6 bg-sky-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-32 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={focus} max={150} required/>
-              </div>
-          
-              <hr className='my-8'/>
+          <div className='pt-10 pb-10'>
 
-              {/* <div className="flex justify-between mb-9">
-                <label for="fokus_lensa" className="pt-3 text-sm font-medium text-gray-900 dark:text-white">Tinggi Bayangan  : </label>
-                <input type="number" className="ml-6 bg-sky-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-32 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={size_} disabled/>
-              </div>
+          <h3 class="mb-4 font-semibold text-gray-900 dark:text-white">Rays</h3>
+          <ul class="w-72 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+              <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+                  <div class="flex items-center pl-3">
+                      <input id="vue-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                      <label for="vue-checkbox" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Marginal</label>
+                  </div>
+              </li>
+              <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+                  <div class="flex items-center pl-3">
+                      <input id="react-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                      <label for="react-checkbox" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Principal</label>
+                  </div>
+              </li>
+              <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+                  <div class="flex items-center pl-3">
+                      <input id="angular-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                      <label for="angular-checkbox" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Many</label>
+                  </div>
+              </li>
+              <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+                  <div class="flex items-center pl-3">
+                      <input id="laravel-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                      <label for="laravel-checkbox" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">None</label>
+                  </div>
+              </li>
+          </ul>
 
-              <div className="flex justify-between mb-9">
-                <label for="fokus_lensa" className="pt-3 text-sm font-medium text-gray-900 dark:text-white">Jarak Bayangan : </label>
-                <input type="number" className="ml-6 bg-sky-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-32 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={distance_} disabled/>
-              </div> */}
+              
 
           </div>
+        </div>
+
+        <div class="flex items-center pl-3">
+            <input id="label-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" onClick={handleLabelClicked} />
+            <label for="label-checkbox" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Label</label>
         </div>
 
         </div>

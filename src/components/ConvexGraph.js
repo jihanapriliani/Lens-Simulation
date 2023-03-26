@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react';
 import propType from 'prop-types';
 import Sketch from 'react-p5';
 
-import { dda, getBoundPoint } from '../utils/DDA';
-import drawCircle from '../utils/Midpoint';
-import { getDistanceReflection, getSizeReflection } from '../utils/Reflections';
+import { dda, getBoundPoint, drawEllipse, getDistanceReflection, getSizeReflection, setLensLabel } from '../utils';
+
 
 export default function ConvexGraph(props) {
-    const {width, height, size, distance, focus} = props;
+    const {width, height, size, distance, focus, hasLabel} = props;
 
     const [distance_, setDistance_] = useState(-getDistanceReflection(distance, focus));
     const [size_, setSize_] = useState(getSizeReflection(distance, size, distance_));
@@ -24,7 +23,7 @@ export default function ConvexGraph(props) {
         p5.background(255,255,255);
         
         p5.stroke(32, 111, 153);
-        drawCircle(width / 2, height / 2, focus / 3, height / 2, p5);
+        drawEllipse(width / 2, height / 2, focus / 3, height / 2, p5);
 
         p5.textSize(18);
         p5.text('f', width / 2 - focus, height / 2);
@@ -43,25 +42,27 @@ export default function ConvexGraph(props) {
         // REFLECTION: OBJECT
         p5.stroke(85, 115, 70);
         dda(width / 2 - distance_, height / 2, width / 2 - distance_, height / 2 - size_, p5);
-        
-        p5.textSize(12);
-        p5.text(size, width / 2 - distance + 10, height / 2 - size / 2);
-        p5.text(-(size_), width / 2 - distance_ + 10, height / 2 - size_ / 2);
-        p5.text(distance, width / 2 - distance / 2, height / 2 + 15);
-        p5.text(-(distance_), width / 2 - distance_ / 2, height / 2 + 15);
-
-        
+         
         p5.stroke("red");
         dda(0, height / 2 - size, width / 2, height / 2 - size, p5);
-        dda(width / 2, height / 2 - size, infinite1[0], infinite1[1], p5);
+        p5.line(width / 2, height / 2 - size, infinite1[0], infinite1[1]);
+        // dda(width / 2, height / 2 - size, infinite1[0], infinite1[1], p5);
         
      
         p5.stroke("yellow");
         dda(width / 2, height / 2 - size_, width, height / 2 - size_, p5);
-        dda(width / 2, height / 2 - size_, infinite2[0], infinite2[1], p5);
+        p5.line(width / 2, height / 2 - size_, infinite2[0], infinite2[1]);
+        // dda(width / 2, height / 2 - size_, infinite2[0], infinite2[1], p5);
 
         p5.stroke("purple");
-        dda(infinite3[0], infinite3[1], infinite4[0], infinite4[1], p5);
+        p5.line(infinite3[0], infinite3[1], infinite4[0], infinite4[1]);
+        // dda(infinite3[0], infinite3[1], infinite4[0], infinite4[1], p5);
+
+        if(hasLabel) {
+            setLensLabel(p5, size, width, distance, height, size_, distance_, focus);
+        }
+
+
     }
 
     useEffect(() => {
