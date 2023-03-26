@@ -21,6 +21,7 @@ function ConvexLens() {
 
   const [label, setLabel] = useState(false);
   const [ray, setRay] = useState("principal");
+  const [object, setObject] = useState("garis");
 
   useEffect(() => {
     setDistance_(-getDistanceReflection(distance, focus));
@@ -53,9 +54,9 @@ function ConvexLens() {
  }
 
  const handleObjectClicked = (e) => {
-
+  setObject(e.target.value)
  }
- 
+
 
   return (
     <div className='flex flex-col w-[100vw] justify-center bg-emerald-100'>
@@ -64,7 +65,7 @@ function ConvexLens() {
 
       <div className="w-100 grid grid-cols-6 gap-4 m-10 shadow-xl">
         <div className='col-span-4'>
-            <Convexlens width={CANVAS_WIDTH} height={CANVAS_HEIGHT} size={heigth} distance={distance} focus={focus} hasLabel={label} ray={ray} />
+            <Convexlens width={CANVAS_WIDTH} height={CANVAS_HEIGHT} size={heigth} distance={distance} focus={focus} hasLabel={label} ray={ray} object={object} />
         </div>
         <div className='col-span-2 bg-white rounded-lg drop-shadow-lg p-6' > 
           <div>
@@ -90,8 +91,54 @@ function ConvexLens() {
             />
           </div>
         <div className='flex justify-between rounded-lg drop-shadow-xl'>
-          <Rays />
-          <Objects />         
+          {/* <Rays handleRay={(e) => handleRayClicked} /> */}
+          <div className='pt-10 pb-10'>
+            <h3 class="mb-4 font-semibold text-gray-900 dark:text-white">Jenis Pemantulan</h3>
+            <ul class="w-48 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg">
+                <li class="w-full border-b border-gray-200 rounded-t-lg">
+                    <div class="flex items-center pl-3">
+                        <input id="principal" type="radio" value="principal" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500" onClick={ handleRayClicked}/>
+                        <label for="principal" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Principal</label>
+                    </div>
+                </li>
+                <li class="w-full border-b border-gray-200 rounded-t-lg">
+                    <div class="flex items-center pl-3">
+                        <input id="marginal" type="radio" value="marginal" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500" onClick={handleRayClicked} />
+                        <label for="marginal" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Marginal </label>
+                    </div>
+                </li>
+                <li class="w-full border-b border-gray-200 rounded-t-lg">
+                    <div class="flex items-center pl-3">
+                        <input id="none" type="radio" value="none" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500" onClick={handleRayClicked} />
+                        <label for="none" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">None</label>
+                    </div>
+                </li>
+            </ul>
+          </div>
+          {/* <Objects />          */}
+          <div className='pt-10 pb-10  max-h-[250px] overflow-hidden'>
+            <h3 class="mb-4 font-semibold text-gray-900 dark:text-white">Objek </h3>
+            <ul class="w-48 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg">
+                <li class="w-full border-b border-gray-200 rounded-t-lg">
+                    <div class="flex items-center pl-3">
+                        <input id="principal" type="radio" value="garis" name="list-object" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500" onClick={handleObjectClicked} />
+                        <label for="principal" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Garis Lurus</label>
+                    </div>
+                </li>
+                <li class="w-full border-b border-gray-200 rounded-t-lg">
+                    <div class="flex items-center pl-3">
+                        <input id="marginal" type="radio" value="gedung" name="list-object" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500" onClick={handleObjectClicked} />
+                        <label for="marginal" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Gedung</label>
+                    </div>
+                </li>
+                <li class="w-full border-b border-gray-200 rounded-t-lg">
+                    <div class="flex items-center pl-3">
+                        <input id="none" type="radio" value="persegi-panjang" name="list-object" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500" onClick={handleObjectClicked} />
+                        <label for="none" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Persegi Panjang</label>
+                    </div>
+                </li>
+            </ul>
+          </div>
         </div>
   
         <div class="flex items-center pl-3">

@@ -6,7 +6,7 @@ import { dda, getBoundPoint, drawEllipse, getDistanceReflection, getSizeReflecti
 
 
 export default function ConvexLens(props) {
-    const {width, height, size, distance, focus, hasLabel, ray} = props;
+    const {width, height, size, distance, focus, hasLabel, ray, object} = props;
 
     const [distance_, setDistance_] = useState(-getDistanceReflection(distance, focus));
     const [size_, setSize_] = useState(getSizeReflection(distance, size, distance_));
@@ -44,7 +44,13 @@ export default function ConvexLens(props) {
         dda(0, height / 2, width, height / 2, p5);
         
 
-        drawStraightLine(p5, width, height, size, distance, size_, distance_);
+        if(object === "garis") {
+            drawStraightLine(p5, width, height, size, distance, size_, distance_);
+        }
+
+        if(object === "gedung") {
+            drawBuilding(p5, width, height, size, distance, size_, distance_);
+        }
         
         if(ray === "marginal") {
             setMarginalConvexLens(p5, height, width, infinite5, infinite6, infinite3, infinite4, infinite7, infinite8);

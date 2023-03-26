@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import propType from 'prop-types';
 import Sketch from 'react-p5';
 
-import { dda, getBoundPoint, drawEllipse, getDistanceReflection, getSizeReflection, setLensLabel, setMarginalConcaveLens } from '../utils';
+import { dda, getBoundPoint, drawBuilding, drawStraightLine, getDistanceReflection, getSizeReflection, setLensLabel, setMarginalConcaveLens } from '../utils';
 
 
 export default function ConcaveLens(props) {
-    const {width, height, size, distance, focus, hasLabel, ray} = props;
+    const {width, height, size, distance, focus, hasLabel, ray, object} = props;
 
     const [distance_, setDistance_] = useState(getDistanceReflection(distance, focus));
     const [size_, setSize_] = useState(getSizeReflection(distance, size, distance_));
@@ -36,7 +36,7 @@ export default function ConcaveLens(props) {
         p5.strokeWeight(2);
         p5.stroke(0);
 
-
+        
         p5.fill(0,0,0);
         p5.textSize(18);
         p5.text('f', width / 2 - focus, height / 2);
@@ -53,6 +53,14 @@ export default function ConcaveLens(props) {
         dda(width / 2 - distance, height / 2, width / 2 - distance, height / 2 - size, p5);
         p5.stroke(85, 115, 70);
         dda(width / 2 - distance_, height / 2, width / 2 - distance_, height / 2 - size_, p5);
+
+        if(object === "garis") {
+            drawStraightLine(p5, width, height, size, distance, size_, distance_);
+        }
+
+        if(object === "gedung") {
+            drawBuilding(p5, width, height, size, distance, size_, distance_);
+        }
         
         if(ray === "marginal") {
             p5.stroke("red");
