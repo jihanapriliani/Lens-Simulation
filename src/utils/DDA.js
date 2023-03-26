@@ -10,9 +10,6 @@ export function dda(x1, y1, x2, y2, p5) {
     let x = x1;
     let y = y1;
 
-
-
-
     for(let i = 0; i <= steps; i++) {
         p5.point(x, y);
 

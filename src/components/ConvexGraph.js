@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import propType from 'prop-types';
 import Sketch from 'react-p5';
 
-import { dda, getBoundPoint, drawEllipse, getDistanceReflection, getSizeReflection, setLensLabel } from '../utils';
+import { dda, getBoundPoint, drawEllipse, getDistanceReflection, getSizeReflection, setLensLabel, setPrincipalRay, setMarginalRay } from '../utils';
 
 
 export default function ConvexGraph(props) {
-    const {width, height, size, distance, focus, hasLabel} = props;
+    const {width, height, size, distance, focus, hasLabel, ray} = props;
 
     const [distance_, setDistance_] = useState(-getDistanceReflection(distance, focus));
     const [size_, setSize_] = useState(getSizeReflection(distance, size, distance_));
@@ -15,6 +15,11 @@ export default function ConvexGraph(props) {
     const [infinite2, setInfinite2] = useState(getBoundPoint(width / 2, height / 2 - size_, width / 2 - distance, height / 2 -size));
     const [infinite3, setInfinite3] = useState(getBoundPoint(width / 2 - distance, height / 2 - size,  width / 2 - distance_, height / 2 - size_));
     const [infinite4, setInfinite4] = useState(getBoundPoint(width / 2 - distance_, height / 2 - size_, width / 2 - distance, height / 2 - size));
+    const [infinite5, setInfinite5] = useState(getBoundPoint(width / 2, 0, width / 2 - distance, height / 2 - size));
+    const [infinite6, setInfinite6] = useState(getBoundPoint(width / 2, 0, width / 2 - distance_, height / 2 - size_));
+    const [infinite7, setInfinite7] = useState(getBoundPoint(width / 2, height, width / 2 - distance, height / 2 - size));
+    const [infinite8, setInfinite8] = useState(getBoundPoint(width / 2, height, width / 2 - distance_, height / 2 - size_));
+
 
 
     const draw = p5 => {
@@ -36,27 +41,19 @@ export default function ConvexGraph(props) {
         dda(width / 2, 0, width / 2, height, p5);
         dda(0, height / 2, width, height / 2, p5);
         
-        // OBJECT
         p5.stroke(50, 168, 82);
         dda(width / 2 - distance, height / 2, width / 2 - distance, height / 2 - size, p5);
-        // REFLECTION: OBJECT
         p5.stroke(85, 115, 70);
         dda(width / 2 - distance_, height / 2, width / 2 - distance_, height / 2 - size_, p5);
-         
-        p5.stroke("red");
-        dda(0, height / 2 - size, width / 2, height / 2 - size, p5);
-        p5.line(width / 2, height / 2 - size, infinite1[0], infinite1[1]);
-        // dda(width / 2, height / 2 - size, infinite1[0], infinite1[1], p5);
         
-     
-        p5.stroke("yellow");
-        dda(width / 2, height / 2 - size_, width, height / 2 - size_, p5);
-        p5.line(width / 2, height / 2 - size_, infinite2[0], infinite2[1]);
-        // dda(width / 2, height / 2 - size_, infinite2[0], infinite2[1], p5);
+        if(ray === "marginal") {
+            setMarginalRay(p5, height, width, infinite5, infinite6, infinite3, infinite4, infinite7, infinite8);
+        }
 
-        p5.stroke("purple");
-        p5.line(infinite3[0], infinite3[1], infinite4[0], infinite4[1]);
-        // dda(infinite3[0], infinite3[1], infinite4[0], infinite4[1], p5);
+        if(ray === "principal") {
+          setPrincipalRay(p5, height, width, size, size_, infinite1, infinite2, infinite3, infinite4);
+        }
+
 
         if(hasLabel) {
             setLensLabel(p5, size, width, distance, height, size_, distance_, focus);
@@ -72,13 +69,20 @@ export default function ConvexGraph(props) {
         setInfinite1(getBoundPoint(width / 2, height / 2 - size, width / 2 - distance_, height / 2 - size_))
         setInfinite2(getBoundPoint(width / 2, height / 2 - size_, width / 2 - distance, height / 2 - size))
         setInfinite3(getBoundPoint(width / 2 - distance, height / 2 - size,  width / 2 - distance_, height / 2 - size_));
-        setInfinite4(getBoundPoint(width / 2 - distance_, height / 2 - size_, width / 2 - distance, height / 2 - size))
+        setInfinite4(getBoundPoint(width / 2 - distance_, height / 2 - size_, width / 2 - distance, height / 2 - size));
+        setInfinite5(getBoundPoint(width / 2, 0, width / 2 - distance, height / 2 - size));
+        setInfinite6(getBoundPoint(width / 2, 0, width / 2 - distance_, height / 2 - size_));
+        setInfinite7(getBoundPoint(width / 2, height, width / 2 - distance, height / 2 - size));
+        setInfinite8(getBoundPoint(width / 2, height, width / 2 - distance_, height / 2 - size_));
 
     }, [distance, size, focus])
   
     const setup = (p5, canvasParentRef) => {
         p5.createCanvas(width, height).parent(canvasParentRef);
     }
+
+    console.log(infinite5);
+    console.log(infinite6);
 
 
     return (
