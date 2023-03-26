@@ -4,10 +4,11 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { getDistanceReflection, getSizeReflection } from './utils/Reflections';
 
-import ConvexGraph from './components/ConvexGraph';
+import ConvexLens from './components/ConvexLens';
+import ConcaveLens from './components/ConcaveLens';
 import Slider from './components/Slider';
-import debounce from 'lodash.debounce';
-import ConcaveGraph from './components/ConcaveGraph';
+import ConvexMirror from './components/ConvexMirror';
+import ConcaveMirror from './components/ConcaveMirror';
 
 
 function App() {
@@ -62,8 +63,10 @@ function App() {
             <div className='p-6 bg-slate-100'>
               <BrowserRouter>
                 <Routes>
-                  <Route path='/' element={<ConvexGraph width={CANVAS_WIDTH} height={CANVAS_HEIGHT} size={heigth} distance={distance} focus={focus} hasLabel={label} ray={ray} />} />
-                  <Route path='concave' element={<ConcaveGraph width={CANVAS_WIDTH} height={CANVAS_HEIGHT} size={heigth} distance={distance} focus={focus} />} />
+                  <Route path='/' element={<ConvexLens width={CANVAS_WIDTH} height={CANVAS_HEIGHT} size={heigth} distance={distance} focus={focus} hasLabel={label} ray={ray} />} />
+                  <Route path='/concave-lens' element={<ConcaveLens width={CANVAS_WIDTH} height={CANVAS_HEIGHT} size={heigth} distance={distance} focus={focus} hasLabel={label} ray={ray} />} />
+                  <Route path='/convex-mirror' element={<ConvexMirror width={CANVAS_WIDTH} height={CANVAS_HEIGHT} size={heigth} distance={distance} focus={focus} hasLabel={label} ray={ray} />} />
+                  <Route path='/concave-mirror' element={<ConcaveMirror width={CANVAS_WIDTH} height={CANVAS_HEIGHT} size={heigth} distance={distance} focus={focus} hasLabel={label} ray={ray} />} />
                 </Routes>
               </BrowserRouter>
             </div>
@@ -101,14 +104,14 @@ function App() {
             <ul class="w-48 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg">
                 <li class="w-full border-b border-gray-200 rounded-t-lg">
                     <div class="flex items-center pl-3">
-                        <input id="marginal" type="radio" value="marginal" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500" onClick={handleRayClicked} />
-                        <label for="marginal" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Marginal </label>
+                        <input id="principal" type="radio" value="principal" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500" onClick={handleRayClicked} clicked={ray === "principal"} />
+                        <label for="principal" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Principal</label>
                     </div>
                 </li>
                 <li class="w-full border-b border-gray-200 rounded-t-lg">
                     <div class="flex items-center pl-3">
-                        <input id="principal" type="radio" value="principal" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500" onClick={handleRayClicked} />
-                        <label for="principal" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Principal</label>
+                        <input id="marginal" type="radio" value="marginal" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500" onClick={handleRayClicked} />
+                        <label for="marginal" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Marginal </label>
                     </div>
                 </li>
                 <li class="w-full border-b border-gray-200 rounded-t-lg">
@@ -125,6 +128,7 @@ function App() {
             <input id="label-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" onClick={handleLabelClicked} />
             <label for="label-checkbox" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Label</label>
         </div>
+
 
         </div>
 
