@@ -10,6 +10,14 @@ export {
     getSizeReflection
 };
 
+export {
+    dda,
+    getBoundPoint,
+    drawEllipse,
+    getDistanceReflection,
+    getSizeReflection
+};
+
 export function setLensLabel(p5, size, width, distance, height, size_, distance_, focus) {
     p5.textSize(16);
     p5.stroke(0,0,0);
