@@ -6,7 +6,7 @@ import { dda, ddaInfinite } from '../utils/DDA';
 import drawCircle from '../utils/Midpoint';
 import { getDistanceReflectionconcave, getSizeReflectionconcave } from '../utils/Reflections';
 
-export default function ConcaveGraph(props) {
+export default function ConvexMirror(props) {
     const {width, height, size, distance, focus} = props;
 
     const [distance_, setDistance_] = useState(getDistanceReflectionconcave(distance, focus));
@@ -69,7 +69,7 @@ export default function ConcaveGraph(props) {
 
 }
 
-ConcaveGraph.propType = {
+ConvexMirror.propType = {
     height: propType.number,
     width: propType.number,
 }
