@@ -1,165 +1,25 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import { getDistanceReflection, getSizeReflection } from './utils/Reflections';
-
-import ConvexLens from './components/ConvexLens';
-import ConcaveLens from './components/ConcaveLens';
-import Slider from './components/Slider';
-import ConvexMirror from './components/ConvexMirror';
-import ConcaveMirror from './components/ConcaveMirror';
+import ConvexLens from './pages/ConvexLens';
+import ConcaveLens from './pages/ConcaveLens';
+import ConvexMirror from './pages/ConvexMirror';
+import ConcaveMirror from './pages/ConcaveMirror';
 
 
 function App() {
-  const [heigth, setHeight] = useState(100);
-  const [distance, setDistance] = useState(200);
-  const [focus, setFocus] = useState(80);
-
-  const [distance_, setDistance_] = useState(-getDistanceReflection(distance, focus));
-  const [size_, setSize_] = useState(getSizeReflection(distance, heigth, distance_));
-
-
-  const [label, setLabel] = useState(false);
-  const [ray, setRay] = useState("principal");
-
-  useEffect(() => {
-    setDistance_(-getDistanceReflection(distance, focus));
-    setSize_(getSizeReflection(distance, heigth, distance_));
-  }, [heigth, distance, focus])
-
-
-  const CANVAS_WIDTH = 1000;
-  const CANVAS_HEIGHT = 600;
-
-
-  const handleDistanceSlider = (e) => {
-    setDistance(parseInt(e.target.value))
-  }
-
-  const handleHeightSlider = (e) => {
-    setHeight(parseInt(e.target.value))
-  }
-
-  const handleFocusSlider = (e) => {
-    setFocus(parseInt(e.target.value))
-  }
-
- const handleLabelClicked = (e) => {
-  setLabel(e.target.checked);
- }
-
- const handleRayClicked = (e) => {
-  setRay(e.target.value);
- }
-
- const handleObjectClicked = (e) => {
-
- }
- 
-
   return (
-    <div className='flex w-[100vw] justify-center bg-emerald-100'>
-  
-
-      <div className="w-100 grid grid-cols-6 gap-4 m-10 shadow-xl">
-        <div className='col-span-4'>
-              <BrowserRouter>
-                <Routes>
-                  <Route path='/' element={<ConvexLens width={CANVAS_WIDTH} height={CANVAS_HEIGHT} size={heigth} distance={distance} focus={focus} hasLabel={label} ray={ray} />} />
-                  <Route path='/concave-lens' element={<ConcaveLens width={CANVAS_WIDTH} height={CANVAS_HEIGHT} size={heigth} distance={distance} focus={focus} hasLabel={label} ray={ray} />} />
-                  <Route path='/convex-mirror' element={<ConvexMirror width={CANVAS_WIDTH} height={CANVAS_HEIGHT} size={heigth} distance={distance} focus={focus} hasLabel={label} ray={ray} />} />
-                  <Route path='/concave-mirror' element={<ConcaveMirror width={CANVAS_WIDTH} height={CANVAS_HEIGHT} size={heigth} distance={distance} focus={focus} hasLabel={label} ray={ray} />} />
-                </Routes>
-              </BrowserRouter>
-        </div>
-
-        <div className='col-span-2 bg-white rounded-lg drop-shadow-lg p-6' >
-      
-          <div>
-            <Slider 
-              title="Jarak Benda"
-              maxValue={CANVAS_WIDTH / 2} 
-              defaultValue={CANVAS_WIDTH / 2 - distance} 
-              onChange={handleDistanceSlider}
-            />
-  
-            <Slider 
-              title="Tinggi Benda"
-              maxValue={CANVAS_HEIGHT / 2} 
-              defaultValue={CANVAS_HEIGHT / 2 - heigth} 
-              onChange={handleHeightSlider}
-            />
-  
-            <Slider 
-              title="Titik Fokus"
-              maxValue={150} 
-              defaultValue={focus} 
-              onChange={handleFocusSlider}
-            />
-          </div>
-
-
-  
-        <div className='flex justify-between rounded-lg drop-shadow-xl'>
-          <div className='pt-10 pb-10'>
-            <h3 class="mb-4 font-semibold text-gray-900 dark:text-white">Jenis Pemantulan</h3>
-            <ul class="w-48 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg">
-                <li class="w-full border-b border-gray-200 rounded-t-lg">
-                    <div class="flex items-center pl-3">
-                        <input id="principal" type="radio" value="principal" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500" onClick={handleRayClicked} clicked={ray === "principal"} />
-                        <label for="principal" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Principal</label>
-                    </div>
-                </li>
-                <li class="w-full border-b border-gray-200 rounded-t-lg">
-                    <div class="flex items-center pl-3">
-                        <input id="marginal" type="radio" value="marginal" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500" onClick={handleRayClicked} />
-                        <label for="marginal" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Marginal </label>
-                    </div>
-                </li>
-                <li class="w-full border-b border-gray-200 rounded-t-lg">
-                    <div class="flex items-center pl-3">
-                        <input id="none" type="radio" value="none" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500" onClick={handleRayClicked} />
-                        <label for="none" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">None</label>
-                    </div>
-                </li>
-            </ul>
-          </div>
-
-          <div className='pt-10 pb-10  max-h-[250px] overflow-hidden'>
-            <h3 class="mb-4 font-semibold text-gray-900 dark:text-white">Objek </h3>
-            <ul class="w-48 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg">
-                <li class="w-full border-b border-gray-200 rounded-t-lg">
-                    <div class="flex items-center pl-3">
-                        <input id="principal" type="radio" value="garis" name="list-object" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500" onClick={handleObjectClicked} clicked={ray === "principal"} />
-                        <label for="principal" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Garis Lurus</label>
-                    </div>
-                </li>
-                <li class="w-full border-b border-gray-200 rounded-t-lg">
-                    <div class="flex items-center pl-3">
-                        <input id="marginal" type="radio" value="gedung" name="list-object" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500" onClick={handleObjectClicked} />
-                        <label for="marginal" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Gedung</label>
-                    </div>
-                </li>
-                <li class="w-full border-b border-gray-200 rounded-t-lg">
-                    <div class="flex items-center pl-3">
-                        <input id="none" type="radio" value="persegi-panjang" name="list-object" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500" onClick={handleObjectClicked} />
-                        <label for="none" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Persegi Panjang</label>
-                    </div>
-                </li>
-            </ul>
-          </div>
-        </div>
-  
-        <div class="flex items-center pl-3">
-            <input id="label-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" onClick={handleLabelClicked} />
-            <label for="label-checkbox" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Tampilkan Nilai</label>
-        </div>
-  
-  
-      </div>
-      </div>
-    </div>
+  <div className='relative'>
+   <BrowserRouter>
+      <Routes>
+        <Route path='/' exact element={<ConvexLens />} />
+        <Route path='/concave-lens' exact element={<ConcaveLens />} />
+        <Route path='/convex-mirror' exact element={<ConvexMirror />} />
+        <Route path='/concave-mirror' exact element={<ConcaveMirror />} />
+      </Routes>
+   </BrowserRouter>
+  </div>
   );
 }
 
