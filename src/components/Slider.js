@@ -13,7 +13,7 @@ export default function Slider(props) {
 
 
   return (
-    <div>
+    <div className='mb-3'>
         <label for="default-range" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{title}</label>
         <input id="medium-range" min={0} max={maxValue} type="range" value={value}
             onChange={handleChange} 

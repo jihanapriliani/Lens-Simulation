@@ -52,15 +52,18 @@ function App() {
  const handleRayClicked = (e) => {
   setRay(e.target.value);
  }
+
+ const handleObjectClicked = (e) => {
+
+ }
  
 
   return (
-    <div className="h-[100vh] bg-sky-100">
-      <div className='flex justify-center items-center'>
+    <div className='flex w-[100vw] justify-center bg-emerald-100'>
+  
 
-        <div className="m-10 drop-shadow-lg">
-          
-            <div className='p-6 bg-slate-100'>
+      <div className="w-100 grid grid-cols-6 gap-4 m-10 shadow-xl">
+        <div className='col-span-4'>
               <BrowserRouter>
                 <Routes>
                   <Route path='/' element={<ConvexLens width={CANVAS_WIDTH} height={CANVAS_HEIGHT} size={heigth} distance={distance} focus={focus} hasLabel={label} ray={ray} />} />
@@ -69,11 +72,9 @@ function App() {
                   <Route path='/concave-mirror' element={<ConcaveMirror width={CANVAS_WIDTH} height={CANVAS_HEIGHT} size={heigth} distance={distance} focus={focus} hasLabel={label} ray={ray} />} />
                 </Routes>
               </BrowserRouter>
-            </div>
         </div>
 
-
-        <div className='bg-white rounded-lg drop-shadow-lg m-10 p-12' >
+        <div className='col-span-2 bg-white rounded-lg drop-shadow-lg p-6' >
       
           <div>
             <Slider 
@@ -82,14 +83,14 @@ function App() {
               defaultValue={CANVAS_WIDTH / 2 - distance} 
               onChange={handleDistanceSlider}
             />
-
+  
             <Slider 
               title="Tinggi Benda"
               maxValue={CANVAS_HEIGHT / 2} 
               defaultValue={CANVAS_HEIGHT / 2 - heigth} 
               onChange={handleHeightSlider}
             />
-
+  
             <Slider 
               title="Titik Fokus"
               maxValue={150} 
@@ -98,9 +99,11 @@ function App() {
             />
           </div>
 
-        <div className='rounded-lg drop-shadow-xl'>
+
+  
+        <div className='flex justify-between rounded-lg drop-shadow-xl'>
           <div className='pt-10 pb-10'>
-            <h3 class="mb-4 font-semibold text-gray-900 dark:text-white">Rays</h3>
+            <h3 class="mb-4 font-semibold text-gray-900 dark:text-white">Jenis Pemantulan</h3>
             <ul class="w-48 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg">
                 <li class="w-full border-b border-gray-200 rounded-t-lg">
                     <div class="flex items-center pl-3">
@@ -122,16 +125,39 @@ function App() {
                 </li>
             </ul>
           </div>
-        </div>
 
+          <div className='pt-10 pb-10  max-h-[250px] overflow-hidden'>
+            <h3 class="mb-4 font-semibold text-gray-900 dark:text-white">Objek </h3>
+            <ul class="w-48 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg">
+                <li class="w-full border-b border-gray-200 rounded-t-lg">
+                    <div class="flex items-center pl-3">
+                        <input id="principal" type="radio" value="garis" name="list-object" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500" onClick={handleObjectClicked} clicked={ray === "principal"} />
+                        <label for="principal" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Garis Lurus</label>
+                    </div>
+                </li>
+                <li class="w-full border-b border-gray-200 rounded-t-lg">
+                    <div class="flex items-center pl-3">
+                        <input id="marginal" type="radio" value="gedung" name="list-object" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500" onClick={handleObjectClicked} />
+                        <label for="marginal" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Gedung</label>
+                    </div>
+                </li>
+                <li class="w-full border-b border-gray-200 rounded-t-lg">
+                    <div class="flex items-center pl-3">
+                        <input id="none" type="radio" value="persegi-panjang" name="list-object" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500" onClick={handleObjectClicked} />
+                        <label for="none" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Persegi Panjang</label>
+                    </div>
+                </li>
+            </ul>
+          </div>
+        </div>
+  
         <div class="flex items-center pl-3">
             <input id="label-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" onClick={handleLabelClicked} />
-            <label for="label-checkbox" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Label</label>
+            <label for="label-checkbox" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Tampilkan Nilai</label>
         </div>
-
-
-        </div>
-
+  
+  
+      </div>
       </div>
     </div>
   );
