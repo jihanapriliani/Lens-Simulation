@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import propType from 'prop-types';
 import Sketch from 'react-p5';
 
-import { dda, getBoundPoint, drawEllipse, getDistanceReflection, getSizeReflection, setLensLabel, setMarginalConvexMirror } from '../utils';
+import { dda, getBoundPoint, drawStraightLine, drawBuilding, getDistanceReflection, getSizeReflection, setLensLabel, setMarginalConvexMirror } from '../utils';
 
 
 export default function ConvexMirror(props) {
-    const {width, height, size, distance, focus, hasLabel, ray} = props;
+    const {width, height, size, distance, focus, hasLabel, ray, object} = props;
 
     const [distance_, setDistance_] = useState(getDistanceReflection(distance, focus));
     const [size_, setSize_] = useState(getSizeReflection(distance, size, distance_));
@@ -40,11 +40,33 @@ export default function ConvexMirror(props) {
         dda(0, height / 2, width, height / 2, p5);
         
 
-        p5.stroke(50, 168, 82);
-        dda(width / 2 - distance, height / 2, width / 2 - distance, height / 2 - size, p5);
-        p5.stroke(85, 115, 70);
-        dda(width / 2 - distance_, height / 2, width / 2 - distance_, height / 2 + size_, p5);
-        
+        if(object === "garis") {
+            p5.stroke(50, 168, 82);
+            dda(width / 2 - distance, height / 2, width / 2 - distance, height / 2 - size, p5);
+            p5.stroke(85, 115, 70);
+            dda(width / 2 - distance_, height / 2, width / 2 - distance_, height / 2 + size_, p5);
+            // drawStraightLine(p5, width, height, size, distance, size_, distance_);
+        }
+
+        if(object === "persegi-panjang") {
+            p5.stroke(50, 168, 82);
+            dda(width / 2 - distance + 20, height / 2, width / 2 - distance + 20, height / 2 - size, p5);
+            dda(width / 2 - distance - 20, height / 2, width / 2 - distance - 20, height / 2 - size, p5);
+            dda(width / 2 - distance + 20, height / 2 - size, width / 2 - distance - 20, height / 2 - size, p5);
+
+
+            p5.stroke(85, 115, 70);
+            dda(width / 2 - distance_ + 20, height / 2, width / 2 - distance_ + 20, height / 2 + size_, p5)
+            dda(width / 2 - distance_ - 20, height / 2, width / 2 - distance_ - 20, height / 2 + size_, p5)
+            dda(width / 2 - distance_ + 20, height / 2 + size_, width / 2 - distance_ - 20, height / 2 + size_, p5);
+        }
+
+        // if(object === "gedung") {
+        //     drawBuilding(p5, width, height, size, distance, size_, distance_);
+        // }
+
+
+
         if(ray === "marginal") {
             p5.stroke("red");
             dda(width / 2 - distance, height / 2 - size, width / 2, 0, p5);

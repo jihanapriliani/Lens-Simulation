@@ -14,10 +14,10 @@ export {
 export function setLensLabel(p5, size, width, distance, height, size_, distance_, focus) {
     p5.textSize(16);
     p5.stroke(0,0,0);
-    p5.text(size, width / 2 - distance + 10, height / 2 - size / 2);
-    p5.text(-(size_), width / 2 - distance_ + 10, height / 2 - size_ / 2);
-    p5.text(distance, width / 2 - distance / 2, height / 2 + 15);
-    p5.text(-(distance_), width / 2 - distance_ / 2, height / 2 + 15);
+    p5.text("tinggi : " + size, width / 2 - distance + 10, height / 2 - size / 2);
+    p5.text("tinggi bayangan : " + -(size_), width / 2 - distance_ + 10, height / 2 - size_ / 2);
+    p5.text("jarak : " + distance, width / 2 - distance / 2, height / 2 + 15);
+    p5.text("jarak bayangan : " + -(distance_), width / 2 - distance_ / 2, height / 2 + 50);
     p5.text("Optical Axis", 20, height / 2 + 15);
     p5.text("f : " + focus, width / 2 + 10, 50);
 }
