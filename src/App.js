@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import { getDistanceReflection, getSizeReflection } from './utils/Reflections';
+import { Link } from 'react-router-dom';
 
 import Header from './components/Header';
 import ConvexGraph from './components/ConvexGraph';
@@ -52,18 +53,22 @@ function App() {
     debounce(handleFocusSlider, 5)
   , []);
 
+  
   return (
     <div className="h-[100vh] bg-sky-100">
       <div className='flex justify-center items-center'>
-
         <div className="m-10 drop-shadow-lg">
             <div class="inline-flex rounded-md shadow-sm mb-3">
-              <button to="/concave" aria-current="page" class="px-4 py-2 text-sm font-medium text-dark bg-white border border-gray-200 rounded-l-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white" relative='path'>
-                Cermin Cekung
-              </button>
-              <button to="/" class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-r-md hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white" relative='path'>
-                Lensa Cembung
-              </button>
+              <a href="/concave">
+                <button ele aria-current="page" class="px-4 py-2 text-sm font-medium text-dark bg-white border border-gray-200 rounded-l-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white" relative='path'>
+                  Cermin Cekung
+                </button>
+              </a>
+              <a href="/">
+                <button class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-r-md hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white" relative='path'>
+                  Lensa Cembung
+                </button>
+              </a>
             </div>
 
 

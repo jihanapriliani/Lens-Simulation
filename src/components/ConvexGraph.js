@@ -105,6 +105,7 @@ export default function ConvexGraph(props) {
         p5.stroke("green");
         ddaInfinite(width / 2 - distance, height / 2 - size,  width / 2, height / 2 - size_, 2, p5);
         ddaInfinite(width / 2, height / 2 - size_,  width / 2, height / 2 - size_, 2, p5);
+        dda(width / 2 - distance, height / 2 - size, width / 2, height / 2 - size_, p5);
         dda(width / 2, height / 2 - size_, width / 2 - distance_, height / 2 - size_, p5);
         dda(width / 2 - distance_, height / 2 - size_, width, height / 2 - size_, p5);
 
