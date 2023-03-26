@@ -20,6 +20,7 @@ function App() {
 
 
   const [label, setLabel] = useState(false);
+  const [ray, setRay] = useState("principal");
 
   useEffect(() => {
     setDistance_(-getDistanceReflection(distance, focus));
@@ -47,6 +48,11 @@ function App() {
   setLabel(e.target.checked);
  }
 
+ const handleRayClicked = (e) => {
+  setRay(e.target.value);
+ }
+ 
+
   return (
     <div className="h-[100vh] bg-sky-100">
       <div className='flex justify-center items-center'>
@@ -56,7 +62,7 @@ function App() {
             <div className='p-6 bg-slate-100'>
               <BrowserRouter>
                 <Routes>
-                  <Route path='/' element={<ConvexGraph width={CANVAS_WIDTH} height={CANVAS_HEIGHT} size={heigth} distance={distance} focus={focus} hasLabel={label} />} />
+                  <Route path='/' element={<ConvexGraph width={CANVAS_WIDTH} height={CANVAS_HEIGHT} size={heigth} distance={distance} focus={focus} hasLabel={label} ray={ray} />} />
                   <Route path='concave' element={<ConcaveGraph width={CANVAS_WIDTH} height={CANVAS_HEIGHT} size={heigth} distance={distance} focus={focus} />} />
                 </Routes>
               </BrowserRouter>
@@ -89,40 +95,29 @@ function App() {
             />
           </div>
 
-        {/* input ukuran objek dan jarak objek */}
         <div className='rounded-lg drop-shadow-xl'>
           <div className='pt-10 pb-10'>
-
-          <h3 class="mb-4 font-semibold text-gray-900 dark:text-white">Rays</h3>
-          <ul class="w-72 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-              <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
-                  <div class="flex items-center pl-3">
-                      <input id="vue-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                      <label for="vue-checkbox" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Marginal</label>
-                  </div>
-              </li>
-              <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
-                  <div class="flex items-center pl-3">
-                      <input id="react-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                      <label for="react-checkbox" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Principal</label>
-                  </div>
-              </li>
-              <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
-                  <div class="flex items-center pl-3">
-                      <input id="angular-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                      <label for="angular-checkbox" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Many</label>
-                  </div>
-              </li>
-              <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
-                  <div class="flex items-center pl-3">
-                      <input id="laravel-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                      <label for="laravel-checkbox" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">None</label>
-                  </div>
-              </li>
-          </ul>
-
-              
-
+            <h3 class="mb-4 font-semibold text-gray-900 dark:text-white">Rays</h3>
+            <ul class="w-48 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg">
+                <li class="w-full border-b border-gray-200 rounded-t-lg">
+                    <div class="flex items-center pl-3">
+                        <input id="marginal" type="radio" value="marginal" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500" onClick={handleRayClicked} />
+                        <label for="marginal" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Marginal </label>
+                    </div>
+                </li>
+                <li class="w-full border-b border-gray-200 rounded-t-lg">
+                    <div class="flex items-center pl-3">
+                        <input id="principal" type="radio" value="principal" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500" onClick={handleRayClicked} />
+                        <label for="principal" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Principal</label>
+                    </div>
+                </li>
+                <li class="w-full border-b border-gray-200 rounded-t-lg">
+                    <div class="flex items-center pl-3">
+                        <input id="none" type="radio" value="none" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500" onClick={handleRayClicked} />
+                        <label for="none" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">None</label>
+                    </div>
+                </li>
+            </ul>
           </div>
         </div>
 
