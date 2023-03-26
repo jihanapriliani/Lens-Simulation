@@ -28,7 +28,10 @@ export default function ConvexLens(props) {
         
         p5.stroke(32, 111, 153);
         drawEllipse(width / 2, height / 2, focus / 3, height / 2, p5);
+        p5.fill(173, 216, 230);
+        p5.ellipse(width / 2, height / 2, focus / 3, height / 1.5, p5);
 
+        p5.fill(0,0,0);
         p5.textSize(18);
         p5.text('f', width / 2 - focus, height / 2);
         p5.text('r', width / 2 - 2 * focus, height / 2);
@@ -38,7 +41,6 @@ export default function ConvexLens(props) {
         p5.text('r', width / 2 + 2 * focus, height / 2);
 
         p5.stroke("black");
-        dda(width / 2, 0, width / 2, height, p5);
         dda(0, height / 2, width, height / 2, p5);
         
 
