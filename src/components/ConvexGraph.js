@@ -38,28 +38,28 @@ export default function ConvexGraph(props) {
         dda(width / 2 - distance, height /2, width / 2 - distance, height / 2 - size, p5);
 
         p5.stroke("brown")
-        dda(width / 2 - distance + 40, height /2, width / 2 - distance + 40, height / 2 - size/2, p5);
-        dda(width / 2 - distance - 40, height /2 , width / 2 - distance - 40, height / 2 - size /2, p5);
-        dda(width / 2 - distance - 40, height / 2 - size/2 , width /2 - distance  + 40, height / 2 - size/2, p5);
+        dda(width / 2 - distance + 40, height /2, width / 2 - distance + 40, height / 2 - size + 20, p5);
+        dda(width / 2 - distance - 40, height /2 , width / 2 - distance - 40, height / 2 - size + 20, p5);
+        dda(width / 2 - distance - 40, height / 2 - size + 20 , width /2 - distance  + 40, height / 2 - size + 20, p5);
 
-        dda(width / 2 - distance + 20, height /2 ,width / 2 - distance + 20, height / 2 - size/16, p5);
-        dda(width / 2 - distance - 20, height /2, width / 2 - distance - 20, height / 2 - size /16, p5);
-        dda(width / 2 - distance - 20, height / 2 - size/16, width /2 - distance  + 20, height / 2 - size/16, p5);
 
-        dda(width / 2 - distance - 125 , height /2, width / 2 - distance - 150, height / 2 - size  /2 - 17, p5);
-        dda(width / 2 - distance - 100 , height /2, width / 2 - distance - 120, height / 2 - size  /2 - 11, p5);
-        dda(width / 2 - distance - 75 , height /2, width / 2 - distance - 95, height / 2 - size  /2 - 9, p5);
-        dda(width / 2 - distance - 55 , height /2, width / 2 - distance - 75, height / 2 - size  /2 - 5, p5);
-        dda(width / 2 - distance - 40 , height /2, width / 2 - distance - 55, height / 2 - size  /2 - 3, p5);
-        dda(width / 2 - distance - 175, height / 2 - size /2 - 20 , width /2 - distance  -40, height / 2 - size/2, p5);
+        dda(width / 2 - distance + 20, height /2 ,width / 2 - distance + 20, height / 2 - size/4, p5);
+        dda(width / 2 - distance - 20, height /2, width / 2 - distance - 20, height / 2 - size /4, p5);
+        dda(width / 2 - distance - 20, height / 2 - size/4, width /2 - distance  + 20, height / 2 - size/4, p5);
 
-        dda(width / 2 - distance + 125 , height /2, width / 2 - distance + 150, height / 2 - size  /2 - 17, p5);
-        dda(width / 2 - distance + 100 , height /2, width / 2 - distance + 120, height / 2 -  size  /2 -  11, p5);
-        dda(width / 2 - distance + 75 , height /2, width / 2 - distance + 95, height / 2 - size  /2 -  9, p5);
-        dda(width / 2 - distance + 55 , height /2, width / 2 - distance + 75, height / 2 - size  /2 - 5, p5);
-        dda(width / 2 - distance + 40 , height /2, width / 2 - distance + 55, height / 2 - size  /2 - 3, p5);
-        dda(width / 2 - distance + 175, height / 2 - size /2 - 20, width /2 - distance  +40, height / 2  - size/2, p5);
-   
+
+        dda(width / 2 - distance - 110 , height /2, width / 2 - distance - 150, height / 2 - size   + 4, p5);
+        dda(width / 2 - distance - 85 , height /2, width / 2 - distance - 120, height / 2 - size  +8, p5);
+        dda(width / 2 - distance - 63 , height /2, width / 2 - distance - 95, height / 2 - size+ 12, p5);
+        dda(width / 2 - distance - 40 , height /2, width / 2 - distance - 70, height / 2 - size + 15, p5);
+        dda(width / 2 - distance - 175, height / 2 -size, width /2 - distance  -40, height / 2 - size +20, p5);
+
+
+        dda(width / 2 - distance + 110 , height /2, width / 2 - distance + 150, height / 2 - size   + 4, p5);
+        dda(width / 2 - distance + 85 , height /2, width / 2 - distance + 120, height / 2 - size  +8, p5);
+        dda(width / 2 - distance + 63 , height /2, width / 2 - distance + 95, height / 2 - size+ 12, p5);
+        dda(width / 2 - distance + 40 , height /2, width / 2 - distance + 70, height / 2 - size + 15, p5);
+        dda(width / 2 - distance + 175, height / 2 -size, width /2 - distance  +40, height / 2 - size +20, p5);
 
 
 
@@ -68,28 +68,29 @@ export default function ConvexGraph(props) {
         dda(width / 2 - distance_, height / 2, width / 2 - distance_, height / 2 - size_, p5);
 
         p5.stroke("blue")
-        dda(width / 2 - distance_ + 40, height /2,width / 2 - distance_ + 40, height / 2 - size_/2, p5);
-        dda(width / 2 - distance_ - 40, height /2 , width / 2 - distance_ - 40, height / 2 - size_ /2, p5);
-        dda(width / 2 - distance_ - 40, height / 2 - size_/2 , width /2 - distance_  + 40, height / 2 - size_/2, p5);
-
-        dda(width / 2 - distance_ + 20, height /2 ,width / 2 - distance_ + 20, height / 2 - size_/16, p5);
-        dda(width / 2 - distance_ - 20, height /2, width / 2 - distance_ - 20, height / 2 - size_ /16, p5);
-        dda(width / 2 - distance_ - 20, height / 2 - size_/16, width /2 - distance_  + 20, height / 2 - size_/16, p5);
+        dda(width / 2 - distance_ + 40, height /2, width / 2 - distance_ + 40, height / 2 - size_ + 20, p5);
+        dda(width / 2 - distance_ - 40, height /2 , width / 2 - distance_ - 40, height / 2 - size_ + 20, p5);
+        dda(width / 2 - distance_ - 40, height / 2 - size_ + 20 , width /2 - distance_  + 40, height / 2 - size_ + 20, p5);
 
 
-        dda(width / 2 - distance_ - 125 , height /2, width / 2 - distance_ - 150, height / 2 - size_  /2 - 17, p5);
-        dda(width / 2 - distance_ - 100 , height /2, width / 2 - distance_ - 120, height / 2 - size_  /2 - 11, p5);
-        dda(width / 2 - distance_ - 75 , height /2, width / 2 - distance_ - 95, height / 2 - size_  /2 - 9, p5);
-        dda(width / 2 - distance_ - 55 , height /2, width / 2 - distance_ - 75, height / 2 - size_  /2 - 5, p5);
-        dda(width / 2 - distance_ - 40 , height /2, width / 2 - distance_ - 55, height / 2 - size_  /2 - 3, p5);
-        dda(width / 2 - distance_ - 175, height / 2 - size_ /2 - 20 , width /2 - distance_  - 40, height / 2 - size_/2, p5);
+        dda(width / 2 - distance_ + 20, height /2 ,width / 2 - distance_ + 20, height / 2 - size_/4, p5);
+        dda(width / 2 - distance_ - 20, height /2, width / 2 - distance_ - 20, height / 2 - size_ /4, p5);
+        dda(width / 2 - distance_ - 20, height / 2 - size_/4, width /2 - distance_  + 20, height / 2 - size_/4, p5);
 
-        dda(width / 2 - distance_ + 125 , height /2, width / 2 - distance_ + 150, height / 2 - size_  /2 - 17, p5);
-        dda(width / 2 - distance_ + 100 , height /2, width / 2 - distance_ + 120, height / 2 -  size_  /2 -  11, p5);
-        dda(width / 2 - distance_ + 75 , height /2, width / 2 - distance_ + 95, height / 2 - size_  /2 -  9, p5);
-        dda(width / 2 - distance_ + 55 , height /2, width / 2 - distance_ + 75, height / 2 - size_  /2 - 5, p5);
-        dda(width / 2 - distance_ + 40 , height /2, width / 2 - distance_ + 55, height / 2 - size_  /2 - 3, p5);
-        dda(width / 2 - distance_ + 175, height / 2 - size_ /2 - 20, width /2 - distance_  + 40, height / 2  - size_/2, p5);
+
+        dda(width / 2 - distance_ - 110 , height /2, width / 2 - distance_ - 150, height / 2 - size_   + 4, p5);
+        dda(width / 2 - distance_ - 85 , height /2, width / 2 - distance_ - 120, height / 2 - size_  +8, p5);
+        dda(width / 2 - distance_ - 63 , height /2, width / 2 - distance_ - 95, height / 2 - size_+ 12, p5);
+        dda(width / 2 - distance_ - 40 , height /2, width / 2 - distance_ - 70, height / 2 - size_ + 15, p5);
+        dda(width / 2 - distance_ - 175, height / 2 -size_, width /2 - distance_  -40, height / 2 - size_ +20, p5);
+
+
+        dda(width / 2 - distance_ + 110 , height /2, width / 2 - distance_ + 150, height / 2 - size_   + 4, p5);
+        dda(width / 2 - distance_ + 85 , height /2, width / 2 - distance_ + 120, height / 2 - size_  +8, p5);
+        dda(width / 2 - distance_ + 63 , height /2, width / 2 - distance_ + 95, height / 2 - size_+ 12, p5);
+        dda(width / 2 - distance_ + 40 , height /2, width / 2 - distance_ + 70, height / 2 - size_ + 15, p5);
+        dda(width / 2 - distance_ + 175, height / 2 -size_, width /2 - distance_  +40, height / 2 - size_ +20, p5);
+
 
 
         // LINE ON THE TOP OF OBJECT (LIGHT 1)
