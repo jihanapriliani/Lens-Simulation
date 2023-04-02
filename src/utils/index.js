@@ -86,16 +86,16 @@ export function drawBuilding(p5, width, height, size, distance, size_, distance_
       dda(width / 2 - distance - 20, height / 2 - size/4, width /2 - distance  + 20, height / 2 - size/4, p5);
 
       dda(width / 2 - distance - 110 , height /2, width / 2 - distance - 150, height / 2 - size   + 4, p5);
-      dda(width / 2 - distance - 85 , height /2, width / 2 - distance - 120, height / 2 - size  +8, p5);
-      dda(width / 2 - distance - 63 , height /2, width / 2 - distance - 95, height / 2 - size+ 12, p5);
-      dda(width / 2 - distance - 40 , height /2, width / 2 - distance - 70, height / 2 - size + 15, p5);
+    //   dda(width / 2 - distance - 85 , height /2, width / 2 - distance - 120, height / 2 - size  +8, p5);
+    //   dda(width / 2 - distance - 63 , height /2, width / 2 - distance - 95, height / 2 - size+ 12, p5);
+    //   dda(width / 2 - distance - 40 , height /2, width / 2 - distance - 70, height / 2 - size + 15, p5);
       dda(width / 2 - distance - 175, height / 2 -size, width /2 - distance  -40, height / 2 - size +20, p5);
 
 
       dda(width / 2 - distance + 110 , height /2, width / 2 - distance + 150, height / 2 - size   + 4, p5);
-      dda(width / 2 - distance + 85 , height /2, width / 2 - distance + 120, height / 2 - size  +8, p5);
-      dda(width / 2 - distance + 63 , height /2, width / 2 - distance + 95, height / 2 - size+ 12, p5);
-      dda(width / 2 - distance + 40 , height /2, width / 2 - distance + 70, height / 2 - size + 15, p5);
+    //   dda(width / 2 - distance + 85 , height /2, width / 2 - distance + 120, height / 2 - size  +8, p5);
+    //   dda(width / 2 - distance + 63 , height /2, width / 2 - distance + 95, height / 2 - size+ 12, p5);
+    //   dda(width / 2 - distance + 40 , height /2, width / 2 - distance + 70, height / 2 - size + 15, p5);
       dda(width / 2 - distance + 175, height / 2 -size, width /2 - distance  +40, height / 2 - size +20, p5);
 
 
@@ -111,16 +111,16 @@ export function drawBuilding(p5, width, height, size, distance, size_, distance_
 
 
       dda(width / 2 - distance_ - 110 , height /2, width / 2 - distance_ - 150, height / 2 - size_   + 4, p5);
-      dda(width / 2 - distance_ - 85 , height /2, width / 2 - distance_ - 120, height / 2 - size_  +8, p5);
-      dda(width / 2 - distance_ - 63 , height /2, width / 2 - distance_ - 95, height / 2 - size_+ 12, p5);
-      dda(width / 2 - distance_ - 40 , height /2, width / 2 - distance_ - 70, height / 2 - size_ + 15, p5);
+    //   dda(width / 2 - distance_ - 85 , height /2, width / 2 - distance_ - 120, height / 2 - size_  +8, p5);
+    //   dda(width / 2 - distance_ - 63 , height /2, width / 2 - distance_ - 95, height / 2 - size_+ 12, p5);
+    //   dda(width / 2 - distance_ - 40 , height /2, width / 2 - distance_ - 70, height / 2 - size_ + 15, p5);
       dda(width / 2 - distance_ - 175, height / 2 -size_, width /2 - distance_  -40, height / 2 - size_ +20, p5);
 
 
       dda(width / 2 - distance_ + 110 , height /2, width / 2 - distance_ + 150, height / 2 - size_   + 4, p5);
-      dda(width / 2 - distance_ + 85 , height /2, width / 2 - distance_ + 120, height / 2 - size_  +8, p5);
-      dda(width / 2 - distance_ + 63 , height /2, width / 2 - distance_ + 95, height / 2 - size_+ 12, p5);
-      dda(width / 2 - distance_ + 40 , height /2, width / 2 - distance_ + 70, height / 2 - size_ + 15, p5);
+    //   dda(width / 2 - distance_ + 85 , height /2, width / 2 - distance_ + 120, height / 2 - size_  +8, p5);
+    //   dda(width / 2 - distance_ + 63 , height /2, width / 2 - distance_ + 95, height / 2 - size_+ 12, p5);
+    //   dda(width / 2 - distance_ + 40 , height /2, width / 2 - distance_ + 70, height / 2 - size_ + 15, p5);
       dda(width / 2 - distance_ + 175, height / 2 -size_, width /2 - distance_  +40, height / 2 - size_ +20, p5);
 }
 
