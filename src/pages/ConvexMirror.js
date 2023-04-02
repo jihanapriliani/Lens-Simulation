@@ -9,6 +9,9 @@ import Rays from '../components/Rays';
 import Objects from '../components/Objects';
 import Header from '../components/Header';
 
+import debounce from 'lodash.debounce';
+
+
 
 function ConvexMirror() {
   const [heigth, setHeight] = useState(100);
@@ -57,6 +60,18 @@ function ConvexMirror() {
   setObject(e.target.value)
  }
 
+   const decounceDistanceHandler = useCallback(
+    debounce(handleDistanceSlider, 20)
+  , []);
+
+  const decounceHeightHandler = useCallback(
+    debounce(handleHeightSlider, 20)
+  , []);
+
+  const decounceFocusHandler = useCallback(
+    debounce(handleFocusSlider, 20)
+  , []);
+
  
 
   return (
@@ -74,21 +89,21 @@ function ConvexMirror() {
               title="Jarak Benda"
               maxValue={CANVAS_WIDTH / 2} 
               defaultValue={CANVAS_WIDTH / 2 - distance} 
-              onChange={handleDistanceSlider}
+              onChange={decounceDistanceHandler}
             />
   
             <Slider 
               title="Tinggi Benda"
               maxValue={CANVAS_HEIGHT / 2} 
               defaultValue={CANVAS_HEIGHT / 2 - heigth} 
-              onChange={handleHeightSlider}
+              onChange={decounceHeightHandler}
             />
   
             <Slider 
               title="Titik Fokus"
               maxValue={150} 
               defaultValue={focus} 
-              onChange={handleFocusSlider}
+              onChange={decounceFocusHandler}
             />
           </div>
         <div className='flex justify-between rounded-lg drop-shadow-xl'>

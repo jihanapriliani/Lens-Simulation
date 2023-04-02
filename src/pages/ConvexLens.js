@@ -9,6 +9,7 @@ import Slider from '../components/Slider';
 import Rays from '../components/Rays';
 import Objects from '../components/Objects';
 
+import debounce from 'lodash.debounce';
 
 function ConvexLens() {
   const [heigth, setHeight] = useState(100);
@@ -57,6 +58,18 @@ function ConvexLens() {
   setObject(e.target.value)
  }
 
+  const decounceDistanceHandler = useCallback(
+    debounce(handleDistanceSlider, 30)
+  , []);
+
+  const decounceHeightHandler = useCallback(
+    debounce(handleHeightSlider, 30)
+  , []);
+    
+  const decounceFocusHandler = useCallback(
+    debounce(handleFocusSlider, 30)
+  , []);
+
 
   return (
     <div className='flex flex-col w-[100vw] justify-center bg-emerald-100'>
@@ -73,21 +86,21 @@ function ConvexLens() {
               title="Jarak Benda"
               maxValue={CANVAS_WIDTH / 2} 
               defaultValue={CANVAS_WIDTH / 2 - distance} 
-              onChange={handleDistanceSlider}
+              onChange={decounceDistanceHandler}
             />
   
             <Slider 
               title="Tinggi Benda"
               maxValue={CANVAS_HEIGHT / 2} 
               defaultValue={CANVAS_HEIGHT / 2 - heigth} 
-              onChange={handleHeightSlider}
+              onChange={decounceHeightHandler}
             />
   
             <Slider 
               title="Titik Fokus"
               maxValue={150} 
               defaultValue={focus} 
-              onChange={handleFocusSlider}
+              onChange={decounceFocusHandler}
             />
           </div>
         <div className='flex justify-between rounded-lg drop-shadow-xl'>
@@ -145,8 +158,6 @@ function ConvexLens() {
             <input id="label-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" onClick={handleLabelClicked} />
             <label for="label-checkbox" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Tampilkan Nilai</label>
         </div>
-  
-  
       </div>
       </div>
     </div>
